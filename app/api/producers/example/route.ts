@@ -1,5 +1,5 @@
 import { getAddressForFid } from "frames.js";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
 const QUEUE = "example";
@@ -35,4 +35,6 @@ export async function POST(_req: NextRequest) {
       body: JSON.stringify({ address: accountAddress }),
     }
   );
+
+  return NextResponse.json({ success: true });
 }
