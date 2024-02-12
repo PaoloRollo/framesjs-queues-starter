@@ -39,6 +39,18 @@ You can find the main logic in two different files:
 
 **NOTE**: the deduplication logic denies multiple messages (from the same user) from existing in the queue at the same time, but does not prevent the same user to later add another message once the previous one has been consumed. This means that you **need to handle yourself** the case in which a user tries to perform an action that is already being processed.
 
+## 🛠️ Test the app
+
+In order to test the workflow the app must be deployed on [Vercel](https://vercel.com), since QStash requires a public endpoint to send the messages to. Once deployed, you can use the `curl` command to send a message to the queue:
+
+```bash
+curl -X POST -H "Content-Type: application/json" https://your-app.vercel.app/api/producers/example
+```
+
+You should be able to see in the logs that the message has been added to the queue, and then consumed by the queue.
+
+You can use various tools to send multiple requests to the queue (like `ab`) and see how the deduplication logic works.
+
 ## 📚 Docs and help
 
 - [Frames.js Documentation](https://framesjs.org)
